@@ -3,98 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Virtual World</title>
+<title>IT University of Bangladesh</title>
 
 <style>
 body {
     margin: 0;
-    overflow: hidden;
     font-family: Arial, sans-serif;
     color: white;
+    background: url('https://images.unsplash.com/photo-1518770660439-4636190af475') no-repeat center/cover;
 }
 
-/* 🔥 Animated gradient background */
-body {
-    background: linear-gradient(-45deg, #ff6a00, #ee0979, #00c6ff, #0072ff);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
+/* overlay */
+.overlay {
+    background: rgba(0,0,0,0.7);
+    height: 100vh;
+    padding: 40px;
 }
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* hide pages */
+.page {
+    display: none;
 }
 
-/* 🔥 Center content */
-.container {
+/* active page */
+.active {
+    display: block;
+}
+
+/* header */
+.title {
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.sub {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    right: 40px;
+    top: 40px;
 }
 
-/* 🔥 Glowing text */
-h1 {
-    font-size: 50px;
-    text-shadow: 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #00ffff;
+/* layout */
+.main {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
 }
 
-/* 🔥 Button */
+.left h2 {
+    font-size: 40px;
+}
+
+.right {
+    text-align: right;
+}
+
+.join {
+    font-size: 60px;
+    color: orange;
+}
+
+/* button */
 .btn {
-    margin-top: 20px;
     padding: 12px 25px;
+    background: orange;
     border: none;
     border-radius: 25px;
-    background: white;
-    color: black;
     font-size: 18px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.btn:hover {
-    background: #ddd;
+/* dropdown */
+.menu {
+    display: none;
+    margin-top: 15px;
 }
 
-/* 🔥 News ticker */
-.ticker {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.7);
-    overflow: hidden;
-    white-space: nowrap;
+.menu button {
+    display: block;
+    margin: 5px;
+    padding: 10px;
+    width: 200px;
+    border: none;
+    background: #222;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.ticker-text {
-    display: inline-block;
-    padding-left: 100%;
-    animation: scrollText 10s linear infinite;
-    font-size: 20px;
-    color: #00ffff;
+.menu button:hover {
+    background: orange;
 }
 
-@keyframes scrollText {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+/* page content */
+.page-content {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.back {
+    margin-top: 20px;
+    background: red;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>🌍 Welcome to our Virtual World</h1>
-    <button class="btn" onclick="alert('Welcome Vai 😄')">Enter</button>
+<div class="overlay">
+
+<!-- 🏫 HOME PAGE -->
+<div id="home" class="active">
+
+    <div class="title">IT UNIVERSITY of BANGLADESH</div>
+    <div class="sub">100% virtual</div>
+
+    <div class="main">
+
+        <div class="left">
+            <h2>Gate in <b>Worldwide</b></h2>
+            <p>
+                Classes<br>
+                Playground<br>
+                Lab/Research<br>
+                Library
+            </p>
+
+            <button class="btn" onclick="toggleMenu()">Get in Worldwide</button>
+
+            <div id="menu" class="menu">
+                <button onclick="openPage('classes')">📚 Classes</button>
+                <button onclick="openPage('exam')">📝 Exam</button>
+                <button onclick="openPage('library')">📖 Library</button>
+                <button onclick="openPage('game')">🎮 Playground</button>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="join">Join Now</div>
+            <p>Build your virtual life (income, fun, tour, learning)</p>
+        </div>
+
+    </div>
+
 </div>
 
-<div class="ticker">
-    <div class="ticker-text">
-        ✨ Welcome to our Virtual World — Dream, Explore, Feel the Emotion 💙 — Stay Connected — Enjoy the Experience 🚀
-    </div>
+<!-- 📚 CLASSES PAGE -->
+<div id="classes" class="page page-content">
+    <h1>📚 Classes Section</h1>
+    <p>Here you will find all virtual classes</p>
+    <button class="btn back" onclick="goHome()">Back</button>
 </div>
+
+<!-- 📝 EXAM PAGE -->
+<div id="exam" class="page page-content">
+    <h1>📝 Exam Section</h1>
+    <p>Online exam system coming soon</p>
+    <button class="btn back" onclick="goHome()">Back</button>
+</div>
+
+<!-- 📖 LIBRARY PAGE -->
+<div id="library" class="page page-content">
+    <h1>📖 Library</h1>
+    <p>Study materials & resources</p>
+    <button class="btn back" onclick="goHome()">Back</button>
+</div>
+
+<!-- 🎮 GAME PAGE -->
+<div id="game" class="page page-content">
+    <h1>🎮 Playground</h1>
+    <p>Fun & games section</p>
+    <button class="btn back" onclick="goHome()">Back</button>
+</div>
+
+</div>
+
+<script>
+function toggleMenu() {
+    let menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function openPage(page) {
+    document.getElementById("home").classList.remove("active");
+
+    let pages = document.querySelectorAll(".page");
+    pages.forEach(p => p.classList.remove("active"));
+
+    document.getElementById(page).classList.add("active");
+}
+
+function goHome() {
+    let pages = document.querySelectorAll(".page");
+    pages.forEach(p => p.classList.remove("active"));
+
+    document.getElementById("home").classList.add("active");
+}
+</script>
 
 </body>
 </html>
